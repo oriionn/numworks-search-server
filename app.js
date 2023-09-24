@@ -37,10 +37,6 @@ fastify.get('/', async ( request, reply) => {
   }
 
   reply.send(resultsData);
-
-  // let res = await axios.get(`https://search.projectsegfau.lt/search?q=site:my.numworks.com/python/ intitle:"— Python" -intitle:"Scripts by" -intitle:"Public library" ${query}&format=json&pageno=1`)
-  // let results = res.data.results;
-  // console.log(results);
 });
 
 fastify.listen({port: 3000}, (err, address) => {
