@@ -7,7 +7,12 @@ const fastify = require('fastify')({
 
 fastify.get('/', async ( request, reply) => {
   const query = request.query.q;
-  if (!query) return reply.status(404).send({error: 'No query provided.'});
+  if (!query) {
+    return reply.status(404).send({
+      status: 404,
+      data: 'No query provided.',
+    });
+  }
 
 
   const searchQ = `
@@ -18,7 +23,12 @@ fastify.get('/', async ( request, reply) => {
     ${query}
   `;
   const res = await axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.KEY}&cx=${process.env.CX}&q=${searchQ}&num=10`);
-  if (!res.data) return reply.status(404).send({error: 'No results found.'});
+  if (!res.data) {
+    return reply.status(404).send({
+      status: 404,
+      data: 'No results found.',
+    });
+  }
 
   let results = res.data.items;
   results = results.map((result) => [
@@ -36,7 +46,7 @@ fastify.get('/', async ( request, reply) => {
     resultsData.push(re);
   }
 
-  reply.send(resultsData);
+  reply.send({status: 200, data: resultsData});
 });
 
 fastify.listen({

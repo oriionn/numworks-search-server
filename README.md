@@ -1,6 +1,9 @@
 # Numworks Search Server
 C'est une simple API qui permet de chercher des scripts Numworks en utiliser une recherche spécifique sur Google en utilisant l'API Custom Search de Google.
 
+## Attention !
+Ce projet utilise l'API de Google et donc limité à un certains nombre de requête par jour.
+
 ## Installation
 1. Clonez le repo
 ```bash
