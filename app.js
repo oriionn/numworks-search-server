@@ -16,6 +16,13 @@ fastify.get('/', async ( request, reply) => {
     });
   }
 
+  let key = process.env.KEY;
+  let cx = process.env.CX;
+  if (request.query.key && request.query.cx) {
+    key = request.query.key;
+    cx = request.query.cx;
+  }
+
 
   const searchQ = `
     site:my.numworks.com/python/
@@ -24,7 +31,7 @@ fastify.get('/', async ( request, reply) => {
     -intitle:"Public library"
     ${query}
   `;
-  const res = await axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.KEY}&cx=${process.env.CX}&q=${searchQ}&num=10`);
+  const res = await axios.get(`https://www.googleapis.com/customsearch/v1?key=${key}&cx=${cx}&q=${searchQ}&num=10`);
   if (!res.data) {
     return reply.status(404).send({
       status: 404,
