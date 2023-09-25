@@ -1,11 +1,11 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const cors = require("@fastify/cors");
+const cors = require('@fastify/cors');
 const fastify = require('fastify')({
   logger: process.argv[2] === 'dev',
 });
-fastify.register(cors)
+fastify.register(cors);
 
 fastify.get('/', async ( request, reply) => {
   const query = request.query.q;
